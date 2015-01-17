@@ -10,7 +10,7 @@ Include jQuery and readGitHub in your page. Best practices recommends placing th
 
 You can link directly to the latest version of readGitHub using [RawGit](http://rawgit.com/)'s CDN (beware that there RawGit provides no uptime or support guarantee).
 
-```
+``` html
 <!-- jQuery -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <!-- readGitHub -->
@@ -21,7 +21,7 @@ You can link directly to the latest version of readGitHub using [RawGit](http://
 
 Initialise readGitHub within your javascript
 
-```
+``` js
 $(document).ready(function() {
 	$('[rel~="github"]').readGitHub();
 });
@@ -29,14 +29,14 @@ $(document).ready(function() {
 ```
 
 readGitHub will look for the `rel="github"` and read the requested repository from `data-repo`.
-```
+``` html
 <div rel="github" data-repo="username/repository"></div>
 ```
 
 ### Style
 
 This is the recommended default styling for readGitHub but feel free to customise it to your heart's content.
-```
+``` css
 .github-read {
 	min-height: 200px;
 	background: rgba(0, 0, 0, .05);
@@ -58,7 +58,7 @@ A number of configuration options are available. One of the most powerful featur
 
 ### Using a renderer
 
-```
+``` js
 $('[rel~="github"]').readGitHub({
 	renderer: function(file) {
 		// Your render function
@@ -69,14 +69,14 @@ $('[rel~="github"]').readGitHub({
 
 For instance to render with markdown-it include the script before `readGitHub.js`.
 
-```
+``` html
 <!-- markdown-it -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/markdown-it/2.2.1/markdown-it.js"></script>
 ```
 
 And use the following within your javascript
 
-```
+``` js
 $('[rel~="github"]').readGitHub({
 	renderer: function(file) {
 		return window.markdownit().render(file)
