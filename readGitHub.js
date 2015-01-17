@@ -7,6 +7,7 @@ return this.each(function(index) {
 
 	// Extend default config
 	var config = $.extend({
+		meta: 'top',
 		provider: 'rawgit',
 		cdn: true,
 		repo: $(this).data('repo'),
@@ -15,7 +16,7 @@ return this.each(function(index) {
 		loading: 'Loading',
 		fail: 'Couldn\'t connect to GitHub',
 		renderer: function(file) {
-			return window.markdownit().render(file)
+			return file
 		}
 	}, options)
 
@@ -33,21 +34,33 @@ return this.each(function(index) {
 	}
 	url = [url, config.repo, config.branch, config.file].join('/')
 
-	// Permanent reference to the placeholder
-	placeholder = $(this)
+	// Wrap in <div>
+	$(this).html('<div class="github-read"><div class="github-file"></div></div>')
+	
+	// Permanent reference for DOM placement
+	gh = $(this).find('.github-file:first')
+
+	// Place meta
+	meta = '<div class="github-meta"><a href="https://github.com/' + config.repo + '/blob/' + config.branch + '/' + config.file + '" target="_blank">' + config.file + '</a><a style="float: right;" href="https://github.com/StudioLE/readgithub" target="_blank">readGitHub.js</a></div>'
+	if(config.meta == 'top') {
+		gh.before(meta)
+	}
+	else if(config.meta == 'bottom') {
+		gh.after(meta)
+	}
 
 	// Insert loading message
-	placeholder.html(config.loading)
+	gh.html(config.loading)
 
 	// Perform get
 	$.ajax(url)
 	.done(function(file) {
 		// If get succeeds render the content using the renderer
-		placeholder.html(config.renderer(file))
+		gh.html(config.renderer(file))
 	})
 	.fail(function() {
 		// If get fails insert failure message
-		placeholder.html(config.fail)
+		gh.html(config.fail)
 	})
 	.always(function() {
 	});
