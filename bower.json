@@ -1,0 +1,22 @@
+{
+  "name": "readgithub",
+  "description": "A jQuery plugin to load files from GitHub",
+  "version": "0.0.1",
+  "homepage": "https://github.com/StudioLE/readgithub",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StudioLE/readgithub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/StudioLE/readgithub/issues"
+  },
+  "license": "MIT",
+  "ignore": [
+    "*/.*",
+    "node_modules",
+    "src",
+    "gulpfile.js",
+    "*.json",
+    "*.md"
+  ]
+}

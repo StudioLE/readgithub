@@ -1,0 +1,13 @@
+.github-read {
+  min-height: 200px;
+  background: rgba(0, 0, 0, .05);
+  border-radius: 5px;
+}
+.github-file {
+  padding: 20px;
+}
+.github-meta {
+  background: rgba(0, 0, 0, .05);
+  padding: 15px 20px;
+  font-size: 75%;
+}

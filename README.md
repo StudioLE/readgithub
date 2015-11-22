@@ -8,13 +8,13 @@ A jQuery plugin to load GitHub files into your page
 
 Include jQuery and readGitHub in your page. Best practices recommends placing them just before the closing `</body>` tag.
 
-You can link directly to the latest version of readGitHub using [RawGit](http://rawgit.com/)'s CDN (beware that there RawGit provides no uptime or support guarantee).
+You can link directly to the latest version of readGitHub using [RawGit](http://rawgit.com/)'s CDN (beware that RawGit provides no uptime or support guarantee).
 
 ``` html
 <!-- jQuery -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <!-- readGitHub -->
-<script src="//cdn.rawgit.com/StudioLE/readgithub/master/readGitHub.js"></script>
+<script src="//cdn.rawgit.com/StudioLE/readgithub/master/dist/readGitHub.js"></script>
 ```
 
 ### Initialise
