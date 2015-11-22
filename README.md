@@ -2,6 +2,18 @@
 
 A jQuery plugin to load GitHub files into your page
 
+## Install
+
+Packages are available via Bower and NPM
+
+```
+npm install --save readgithub
+```
+
+```
+bower install --save readgithub
+```
+
 ## Usage
 
 ### Include the scripts
