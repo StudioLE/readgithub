@@ -24,7 +24,7 @@ var build = {
 gulp.task('bump', function(){
   gulp.src(['./bower.json', './package.json'])
   .pipe(gp_bump({
-    type:'prerelease'
+    // type:'prerelease'
   }))
   .pipe(gulp.dest('./'))
 })
