@@ -3,7 +3,7 @@ var p = require('path')
 var ver = require('./package.json').version
 
 // Node modules
-var gulp = require('gulp')
+const { src, dest, parallel } = require('gulp')
 var gp_bump = require('gulp-bump')
 var gp_clean = require('gulp-clean')
 var gp_rename = require('gulp-rename')
@@ -21,42 +21,45 @@ var build = {
 }
 
 // Bump version
-gulp.task('bump', function(){
-  gulp.src(['./bower.json', './package.json'])
+var bump = function() {
+  return src(['./bower.json', './package.json'])
   .pipe(gp_bump({
     // type:'prerelease'
   }))
-  .pipe(gulp.dest('./'))
-})
+  .pipe(dest('./'))
+}
 
 // Clean build directory
- gulp.task('clean', function () {
-  return gulp.src(build.path(), {
+var clean = function () {
+  return src(build.path(), {
     // read: false
   })
   .pipe(gp_clean())
-})
+}
 
 // Build app CSS
-gulp.task('css', function() {
-  gulp.src('src/readgithub.css')
-  .pipe(gulp.dest(build.path('css')))
+var css = function() {
+  return src('src/readgithub.css')
+  .pipe(dest('dist/css'))
   .pipe(gp_rename('readgithub.min.css'))
-  .pipe(gp_minify({keepSpecialComments: 0}))
-  .pipe(gulp.dest(build.path('css')))
-})
+  .pipe(gp_minify({ keepSpecialComments: 0 }))
+  .pipe(dest('dist/css'))
+}
 
 // Build app JS
-gulp.task('js', function() {
-  gulp.src('src/readgithub.js')
-  .pipe(gulp.dest(build.path('js')))
+var js = function() {
+  return src('src/readgithub.js')
+  .pipe(dest('dist/js'))
   .pipe(gp_rename('readgithub.min.js'))
   .pipe(gp_uglify())
-  .pipe(gulp.dest(build.path('js')))
-})
+  .pipe(dest('dist/js'))
+}
+
+// Clean task
+exports.clean = parallel(clean)
 
 // Build task
-gulp.task('build', ['css', 'js'])
+exports.build = parallel(css, js)
 
 // Default task
-gulp.task('default', ['build'])
+exports.default = exports.build
