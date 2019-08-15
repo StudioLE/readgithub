@@ -1,5 +1,4 @@
 // Core modules
-var p = require('path')
 var ver = require('./package.json').version
 
 // Node modules
@@ -9,16 +8,6 @@ var gp_clean = require('gulp-clean')
 var gp_rename = require('gulp-rename')
 var gp_uglify = require('gulp-uglify')
 var gp_minify = require('gulp-minify-css')
-
-var build = {
-  /**
-   * Format build directory path
-   */
-  path: function(path) {
-    if( ! path) path = ''
-    return p.join('dist', path)
-  }
-}
 
 // Bump version
 var bump = function() {
@@ -31,7 +20,7 @@ var bump = function() {
 
 // Clean build directory
 var clean = function () {
-  return src(build.path(), {
+  return src('dist', {
     // read: false
   })
   .pipe(gp_clean())
@@ -55,11 +44,8 @@ var js = function() {
   .pipe(dest('dist/js'))
 }
 
-// Clean task
+// Tasks
+exports.bump = parallel(bump)
 exports.clean = parallel(clean)
-
-// Build task
 exports.build = parallel(css, js)
-
-// Default task
 exports.default = exports.build
