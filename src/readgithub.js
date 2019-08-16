@@ -16,6 +16,7 @@
         loading: 'Loading',
         fail: 'Couldn\'t connect to GitHub',
         replaceRelativeIMG: true,
+        replaceRelativeLinks: true,
         renderer: function(file) {
           return file
         }
@@ -68,6 +69,15 @@
           var cdn = 'https://cdn.jsdelivr.net/gh'
           cdn = [cdn, config.repo + '@' + config.branch].join('/')
           var replacement = '![](' + cdn + '/'
+          file = file.replace(pattern, replacement)
+        }
+        if(config.replaceRelativeLinks) {
+          // Match ]( except when ![](
+          // unless url prefixed with https:// http:// or //
+          var pattern = /(?<!!\[)\]\((?!https?:\/\/|\/\/)/gu
+          var github = 'https://github.com'
+          github = [github, config.repo, 'blob', config.branch].join('/')
+          var replacement = '](' + github + '/'
           file = file.replace(pattern, replacement)
         }
         // If get succeeds render the content using the renderer
