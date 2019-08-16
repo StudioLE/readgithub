@@ -8,7 +8,7 @@ return this.each(function(index) {
 	// Extend default config
 	var config = $.extend({
 		meta: 'top',
-		provider: 'rawgit',
+		provider: 'jsdelivr',
 		cdn: true,
 		repo: $(this).data('repo'),
 		branch: 'master',
@@ -28,11 +28,16 @@ return this.each(function(index) {
 	if(config.provider == 'rawgit') {
 		if(config.cdn) url += 'cdn.'
 		url += 'rawgit.com'
+		url = [url, config.repo, config.branch, config.file].join('/')
+	}
+	else if(config.provider == 'jsdelivr') {
+		url += 'cdn.jsdelivr.net/gh'
+		url = [url, config.repo + '@' + config.branch, config.file].join('/')
 	}
 	else if(config.provider == 'github') {
 		url += 'raw.githubusercontent.com'
+		url = [url, config.repo, config.branch, config.file].join('/')
 	}
-	url = [url, config.repo, config.branch, config.file].join('/')
 
 	// Wrap in <div>
 	$(this).html('<div class="github-read"><div class="github-file"></div></div>')
