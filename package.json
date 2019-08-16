@@ -26,6 +26,7 @@
   },
   "main": "dist/js/readgithub.js",
   "scripts": {
-    "start": "gulp build"
+    "start": "gulp build",
+    "test": "http-server -c-1 -p 8080"
   }
 }
