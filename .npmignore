@@ -1,6 +1,7 @@
 /examples
 /node_modules
 /src
+.eslintrc.js
 gulpfile.js
 *.json
 *.md
