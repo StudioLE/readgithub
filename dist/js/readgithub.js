@@ -15,6 +15,7 @@ return this.each(function(index) {
 		file: 'README.md',
 		loading: 'Loading',
 		fail: 'Couldn\'t connect to GitHub',
+		replaceRelativeIMG: true,
 		renderer: function(file) {
 			return file
 		}
@@ -60,6 +61,15 @@ return this.each(function(index) {
 	// Perform get
 	$.ajax(url)
 	.done(function(file) {
+		if(config.replaceRelativeIMG) {
+			// Match ![]( 
+			// unless url prefixed with https:// http:// or //
+			var pattern = /\!\[\]\((?!https?:\/\/|\/\/)/g
+			var cdn = 'https://cdn.jsdelivr.net/gh'
+			cdn = [cdn, config.repo + '@' + config.branch].join('/')
+			var replacement = '![](' + cdn + '/'
+			file = file.replace(pattern, replacement)
+		}
 		// If get succeeds render the content using the renderer
 		gh.html(config.renderer(file))
 	})
