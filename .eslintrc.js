@@ -85,7 +85,7 @@ module.exports = {
     'jsx-quotes': 'warn',
     'key-spacing': 'warn',
     'keyword-spacing': 'off',
-    'line-comment-position': 'warn',
+    'line-comment-position': 'off',
     'lines-around-comment': 'warn',
     'lines-around-directive': 'warn',
     'lines-between-class-members': 'warn',
@@ -132,7 +132,7 @@ module.exports = {
     'no-implicit-coercion': 'warn',
     'no-implicit-globals': 'warn',
     'no-implied-eval': 'warn',
-    'no-inline-comments': 'warn',
+    'no-inline-comments': 'off',
     'no-inner-declarations': [
       'warn',
       'functions'
