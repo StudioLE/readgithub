@@ -62,23 +62,39 @@
       // Perform get
       $.ajax(url)
       .done(function(file) {
+        var pattern = '';
+        var matches = '';
         if(config.replaceRelativeIMG) {
-          // Match ![]( 
-          // unless url prefixed with https:// http:// or //
-          var pattern = /!\[\]\((?!https?:\/\/|\/\/)/gu
           var cdn = 'https://cdn.jsdelivr.net/gh'
           cdn = [cdn, config.repo + '@' + config.branch].join('/')
-          var replacement = '![](' + cdn + '/'
-          file = file.replace(pattern, replacement)
+          pattern = /!\[(.*)\]\((.*)\)/gu
+          matches = file.matchAll(pattern)
+          matches = Array.from(matches)
+          matches.forEach(function(matchArray) {
+            var match = matchArray[0]
+            var alt = matchArray[1]
+            var path = matchArray[2]
+            if(path.substr(0, 2) != '//' && path.substr(0, 7) != 'http://' && path.substr(0, 8) != 'https://') {
+              var replacement = '![' + alt + '](' + cdn + '/' + path + ')'
+              file = file.replace(match, replacement)
+            }
+          })
         }
         if(config.replaceRelativeLinks) {
-          // Match ]( except when ![](
-          // unless url prefixed with https:// http:// or //
-          var pattern = /(?<!!\[)\]\((?!https?:\/\/|\/\/)/gu
           var github = 'https://github.com'
           github = [github, config.repo, 'blob', config.branch].join('/')
-          var replacement = '](' + github + '/'
-          file = file.replace(pattern, replacement)
+          pattern = /\[(.*)\]\((.*)\)/gu
+          matches = file.matchAll(pattern)
+          matches = Array.from(matches)
+          matches.forEach(function(matchArray) {
+            var match = matchArray[0]
+            var alt = matchArray[1]
+            var path = matchArray[2]
+            if(path.substr(0, 2) != '//' && path.substr(0, 7) != 'http://' && path.substr(0, 8) != 'https://') {
+              var replacement = '[' + alt + '](' + github + '/' + path + ')'
+              file = file.replace(match, replacement)
+            }
+          })
         }
         // If get succeeds render the content using the renderer
         gh.html(config.renderer(file))
