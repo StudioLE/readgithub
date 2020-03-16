@@ -62,12 +62,12 @@
       // Perform get
       $.ajax(url)
       .done(function(file) {
-        var pattern = '';
-        var matches = '';
-        if(config.replaceRelativeIMG) {
+        var pattern = ''
+        var matches = ''
+        if(config.replaceRelativeIMG && String.prototype.hasOwnProperty('matchAll')) {
           var cdn = 'https://cdn.jsdelivr.net/gh'
           cdn = [cdn, config.repo + '@' + config.branch].join('/')
-          pattern = /!\[(.*)\]\((.*)\)/gu
+          pattern = /!\[(.*)\]\((.*)\)/g
           matches = file.matchAll(pattern)
           matches = Array.from(matches)
           matches.forEach(function(matchArray) {
@@ -80,10 +80,10 @@
             }
           })
         }
-        if(config.replaceRelativeLinks) {
+        if(config.replaceRelativeLinks && String.prototype.hasOwnProperty('matchAll')) {
           var github = 'https://github.com'
           github = [github, config.repo, 'blob', config.branch].join('/')
-          pattern = /\[(.*)\]\((.*)\)/gu
+          pattern = /\[(.*)\]\((.*)\)/g
           matches = file.matchAll(pattern)
           matches = Array.from(matches)
           matches.forEach(function(matchArray) {
@@ -96,6 +96,11 @@
             }
           })
         }
+
+        if( ! String.prototype.hasOwnProperty('matchAll')) {
+          file = '*Please note: This content is loaded automatically from GitHub and is best viewed in [Google Chrome](https://www.google.com/chrome/). Internet Explorer and Microsoft Edge will not load inline images.*\n\n' + file
+        }
+
         // If get succeeds render the content using the renderer
         gh.html(config.renderer(file))
       })
