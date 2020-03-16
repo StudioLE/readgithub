@@ -62,8 +62,8 @@
       // Perform get
       $.ajax(url)
       .done(function(file) {
-        var pattern = '';
-        var matches = '';
+        var pattern = ''
+        var matches = ''
         if(config.replaceRelativeIMG) {
           var cdn = 'https://cdn.jsdelivr.net/gh'
           cdn = [cdn, config.repo + '@' + config.branch].join('/')
