@@ -47,7 +47,7 @@ module.exports = {
     ],
     'consistent-return': 'warn',
     'consistent-this': 'warn',
-    'curly': 'warn',
+    'curly': 'off',
     'default-case': 'warn',
     'dot-location': [
       'warn',
@@ -168,7 +168,7 @@ module.exports = {
     'no-process-env': 'warn',
     'no-process-exit': 'warn',
     'no-proto': 'warn',
-    'no-prototype-builtins': 'warn',
+    'no-prototype-builtins': 'off',
     'no-restricted-globals': 'warn',
     'no-restricted-imports': 'warn',
     'no-restricted-modules': 'warn',
@@ -222,7 +222,7 @@ module.exports = {
     'object-curly-newline': ['warn', { 'consistent': true }],
     'object-curly-spacing': ['warn', 'always'],
     'object-property-newline': 'warn',
-    'object-shorthand': 'warn',
+    'object-shorthand': 'off',
     'one-var': 'off',
     'one-var-declaration-per-line': [
       'warn',
@@ -251,7 +251,7 @@ module.exports = {
     'require-atomic-updates': 'warn',
     'require-await': 'warn',
     'require-jsdoc': 'off',
-    'require-unicode-regexp': 'warn',
+    'require-unicode-regexp': 'off',
     'rest-spread-spacing': 'warn',
     'semi': ['warn', 'never'],
     'semi-spacing': [
@@ -269,7 +269,16 @@ module.exports = {
     'space-before-function-paren': 'off',
     'space-in-parens': 'off',
     'space-infix-ops': 'warn',
-    'space-unary-ops': 'warn',
+    'space-unary-ops': [
+      'warn',
+      {
+        "words": true,
+        "nonwords": false,
+        "overrides": {
+          "!": true
+        }
+      }
+    ],
     'spaced-comment': [
       'warn',
       'always'
