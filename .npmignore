@@ -5,3 +5,4 @@
 gulpfile.js
 *.json
 *.md
+*.code-workspace
