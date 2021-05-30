@@ -11,7 +11,7 @@
         provider: 'jsdelivr',
         cdn: true,
         repo: $(this).data('repo'),
-        branch: 'master',
+        branch: 'main',
         file: 'README.md',
         loading: 'Loading',
         fail: 'Couldn\'t connect to GitHub',
